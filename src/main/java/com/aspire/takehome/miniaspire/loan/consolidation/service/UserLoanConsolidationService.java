@@ -1,11 +1,11 @@
 package com.aspire.takehome.miniaspire.loan.consolidation.service;
 
+import com.aspire.takehome.miniaspire.common.enums.LoanStatus;
 import com.aspire.takehome.miniaspire.dal.entity.LoanEntity;
 import com.aspire.takehome.miniaspire.dal.entity.RepaymentEntity;
 import com.aspire.takehome.miniaspire.dal.repository.LoanRepository;
 import com.aspire.takehome.miniaspire.dal.repository.RepaymentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +30,14 @@ public class UserLoanConsolidationService {
                 .map(LoanEntity::getId)
                 .collect(Collectors.toList());
         return repaymentRepository.findByLoanIdIn(loanIds);
+    }
+
+    public List<LoanEntity> getUserLoans(Long userId,
+                                         List<LoanStatus> statuses) {
+        return loanRepository.findByUserIdAndStatusIn(
+                userId,
+                statuses
+        );
     }
 }
 
