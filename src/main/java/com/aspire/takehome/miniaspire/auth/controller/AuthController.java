@@ -1,11 +1,14 @@
 package com.aspire.takehome.miniaspire.auth.controller;
 
+import com.aspire.takehome.miniaspire.auth.dto.UserAuthResponseDTO;
+import com.aspire.takehome.miniaspire.auth.dto.UserRegistrationResponseDTO;
 import com.aspire.takehome.miniaspire.auth.util.JwtUtil;
 import com.aspire.takehome.miniaspire.dal.entity.UserEntity;
-import com.aspire.takehome.miniaspire.auth.dto.UserAuthDTO;
+import com.aspire.takehome.miniaspire.auth.dto.UserAuthRequestDTO;
 import com.aspire.takehome.miniaspire.auth.service.UserRegistrationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,11 +34,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerCustomer(@RequestBody UserAuthDTO registrationDTO) {
+    public ResponseEntity<UserRegistrationResponseDTO> registerCustomer(@RequestBody UserAuthRequestDTO registrationDTO) {
         UserEntity user = userRegistrationService.registerCustomer(registrationDTO);
-        // Generate JWT token
-
-        return ResponseEntity.ok("");
+        return new ResponseEntity<>(
+                new UserRegistrationResponseDTO(user.getId()),
+                HttpStatus.CREATED
+        );
     }
 
     @GetMapping     // TODO: Remove this
@@ -46,7 +50,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String generateToken(@RequestBody UserAuthDTO authRequest) throws Exception {
+    public ResponseEntity<UserAuthResponseDTO> generateToken(@RequestBody UserAuthRequestDTO authRequest) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -57,7 +61,13 @@ public class AuthController {
         } catch (Exception ex) {
             throw new Exception("Invalid username/password");
         }
-        return jwtUtil.generateToken(authRequest.getUsername());
+        return new ResponseEntity<>(
+                new UserAuthResponseDTO(
+                        authRequest.getUsername(),
+                        jwtUtil.generateToken(authRequest.getUsername())
+                ),
+                HttpStatus.OK
+        );
     }
 
 }

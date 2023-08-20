@@ -3,6 +3,7 @@ package com.aspire.takehome.miniaspire.loan.application.controller;
 import com.aspire.takehome.miniaspire.common.exceptions.UserNotFoundException;
 import com.aspire.takehome.miniaspire.dal.entity.LoanEntity;
 import com.aspire.takehome.miniaspire.loan.application.dto.LoanApplicationRequestDTO;
+import com.aspire.takehome.miniaspire.loan.application.dto.LoanApplicationResponseDTO;
 import com.aspire.takehome.miniaspire.loan.application.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,15 +22,19 @@ public class LoanApplicationController {
     private LoanApplicationService loanApplicationService;
 
     @PostMapping
-    public ResponseEntity<LoanEntity> createLoan(@RequestBody LoanApplicationRequestDTO loanRequest,
-                                                 @AuthenticationPrincipal UserDetails userDetails) throws UserNotFoundException {
+    public ResponseEntity<LoanApplicationResponseDTO> createLoan(@RequestBody LoanApplicationRequestDTO loanRequest,
+                                                                 @AuthenticationPrincipal UserDetails userDetails) throws UserNotFoundException {
         LoanEntity createdLoan = loanApplicationService.createLoan(
                 loanRequest,
                 userDetails.getUsername()
         );
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(createdLoan);
+        return new ResponseEntity<>(
+                new LoanApplicationResponseDTO(
+                        createdLoan.getId(),
+                        createdLoan.getApplicationDate()
+                ),
+                HttpStatus.CREATED
+        );
     }
 }
 

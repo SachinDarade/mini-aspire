@@ -10,6 +10,7 @@ import com.aspire.takehome.miniaspire.dal.entity.RepaymentEntity;
 import com.aspire.takehome.miniaspire.dal.repository.LoanRepository;
 import com.aspire.takehome.miniaspire.dal.repository.RepaymentRepository;
 import com.aspire.takehome.miniaspire.loan.repayment.dto.RepaymentRequestDTO;
+import com.aspire.takehome.miniaspire.loan.repayment.dto.RepaymentResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class RepaymentService {
     private final LoanRepository loanRepository;
 
     @Transactional
-    public void makeRepayment(RepaymentRequestDTO repaymentRequest) throws RepaymentAmountInvalidException {
+    public LoanEntity makeRepayment(RepaymentRequestDTO repaymentRequest) throws RepaymentAmountInvalidException {
 
         // Step 1: Get concerned loan
         LoanEntity loan = loanRepository
@@ -48,10 +49,12 @@ public class RepaymentService {
 
         // Step 4.2: Update total amount paid till now
         loan.setAmountPaid(loan.getAmountPaid() + repaymentRequest.getAmount());
-        loanRepository.save(loan);
+        loan = loanRepository.save(loan);
 
         // Step 5: Check if all repayments are paid for the loan
         updateLoanStatusIfAllRepaymentsPaid(scheduledRepayment.getLoan());
+
+        return loan;
 
     }
 

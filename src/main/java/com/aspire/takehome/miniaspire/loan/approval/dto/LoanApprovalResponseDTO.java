@@ -13,12 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class LoanApprovalResponseDTO {
-    private Long id;
-    private Double amountRequired;
-    private Integer loanTerm;
-    private LocalDate applicationDate;
-    private Double amountPaid;
-    private LoanStatus status;
-
+    private Long loadId;
+    private LoanStatus newLoanStatus;
 }
 

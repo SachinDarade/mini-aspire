@@ -16,17 +16,18 @@ public class LoanApprovalService {
     private LoanRepository loanRepository;
 
     @Transactional
-    public void approveLoan(LoanApprovalRequestDTO approvalDTO) {
+    public LoanEntity approveLoan(Long loanId,
+                                  boolean loanApproved) {
         LoanEntity loan = loanRepository
-                .findById(approvalDTO.getLoanId())
+                .findById(loanId)
                 .orElseThrow(() -> new LoanNotFoundException("Loan not found"));
 
-        if (approvalDTO.isApproved()) {
+        if (loanApproved) {
             loan.setStatus(LoanStatus.APPROVED);
         } else {
             loan.setStatus(LoanStatus.REJECTED);
         }
-        loanRepository.save(loan);
+        return loanRepository.save(loan);
     }
 }
 

@@ -1,10 +1,10 @@
 package com.aspire.takehome.miniaspire.auth.service;
 
 import com.aspire.takehome.miniaspire.dal.entity.UserEntity;
-import com.aspire.takehome.miniaspire.auth.dto.UserAuthDTO;
+import com.aspire.takehome.miniaspire.auth.dto.UserAuthRequestDTO;
 
 public interface UserRegistrationService {
 
-    UserEntity registerCustomer(UserAuthDTO registrationDTO);
+    UserEntity registerCustomer(UserAuthRequestDTO registrationDTO);
 
 }
