@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,7 +39,9 @@ public class AuthController {
     }
 
     @GetMapping
-    public String welcome() {
+    public String welcome(Authentication authentication) {
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        log.info("auth user {}", userDetails.getUsername());
         return "Hello bros";
     }
 
