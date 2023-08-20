@@ -1,6 +1,5 @@
 package com.aspire.takehome.miniaspire.loan.consolidation.controller;
 
-import com.aspire.takehome.miniaspire.common.enums.LoanStatus;
 import com.aspire.takehome.miniaspire.common.exceptions.UserNotFoundException;
 import com.aspire.takehome.miniaspire.dal.entity.LoanEntity;
 import com.aspire.takehome.miniaspire.loan.consolidation.dto.ConsolidationRequestDTO;
