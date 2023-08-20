@@ -17,13 +17,17 @@ public class MiniAspireApplication {
 	@Autowired
 	private UserRepository userRepository;
 
+	/**
+	 * This initialises our Database
+	 * Used for testing our system
+	 */
 	@PostConstruct
 	public void initUsers() {
 		List<UserEntity> users = Stream.of(
-				new UserEntity(101L, "Sachin", "sachin123", "sachindarade11g@gmail.com", true),
-				new UserEntity(102L, "Aspire", "aspire123", "admin@aspire.com", true),
-				new UserEntity(103L, "user2", "pwd2", "user2@gmail.com", false),
-				new UserEntity(104L, "user3", "pwd3", "user3@gmail.com", false)
+				new UserEntity(null, "Sachin", "sachin123", "sachindarade11g@gmail.com", true),
+				new UserEntity(null, "Aspire", "aspire123", "admin@aspire.com", true),
+				new UserEntity(null, "user2", "pwd2", "user2@gmail.com", false),
+				new UserEntity(null, "user3", "pwd3", "user3@gmail.com", false)
 		).collect(Collectors.toList());
 		userRepository.saveAll(users);
 	}

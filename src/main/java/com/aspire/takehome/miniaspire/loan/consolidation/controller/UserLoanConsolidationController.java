@@ -6,7 +6,6 @@ import com.aspire.takehome.miniaspire.loan.consolidation.dto.ConsolidationReques
 import com.aspire.takehome.miniaspire.loan.consolidation.dto.ConsolidationResponseDTO;
 import com.aspire.takehome.miniaspire.loan.consolidation.service.UserLoanConsolidationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

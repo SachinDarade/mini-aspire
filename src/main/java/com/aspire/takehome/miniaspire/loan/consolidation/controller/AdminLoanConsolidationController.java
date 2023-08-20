@@ -1,42 +1,30 @@
 package com.aspire.takehome.miniaspire.loan.consolidation.controller;
 
 import com.aspire.takehome.miniaspire.common.exceptions.UserNotFoundException;
-import com.aspire.takehome.miniaspire.dal.entity.LoanEntity;
 import com.aspire.takehome.miniaspire.loan.consolidation.dto.ConsolidationRequestDTO;
 import com.aspire.takehome.miniaspire.loan.consolidation.dto.ConsolidationResponseDTO;
-import com.aspire.takehome.miniaspire.loan.consolidation.service.AdminLoanConsolidationService;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
+public interface AdminLoanConsolidationController {
 
-@RequiredArgsConstructor
-@RestController
-@RequestMapping("mini-aspire/v1/loan/consolidation/admin-screen")
-public class AdminLoanConsolidationController {
-
-    private final AdminLoanConsolidationService adminLoanConsolidationService;
-
+    /**
+     * Get all loans with the statuses given
+     * @param consolidationRequest status of loans
+     * @return list og all loans with given statuses
+     */
     @GetMapping
-    public ResponseEntity<ConsolidationResponseDTO> getLoansWithStatuses(@RequestBody ConsolidationRequestDTO consolidationRequest) {
-        List<LoanEntity> loans = adminLoanConsolidationService.getLoansWithStatuses(consolidationRequest.getStatuses());
-        return new ResponseEntity<>(
-                new ConsolidationResponseDTO(loans),
-                HttpStatus.OK
-        );
-    }
+    ResponseEntity<ConsolidationResponseDTO> getLoansWithStatuses(@RequestBody ConsolidationRequestDTO consolidationRequest);
 
+    /**
+     * Get loans of given user
+     * @param username username of the user
+     * @return loan details of the user
+     * @throws UserNotFoundException if user is not found
+     */
     @GetMapping("/{username}")
-    public ResponseEntity<ConsolidationResponseDTO> getLoansByUsername(@PathVariable @NonNull String username) throws UserNotFoundException {
-        List<LoanEntity> loans = adminLoanConsolidationService.getLoansByUsername(username);
-        return new ResponseEntity<>(
-                new ConsolidationResponseDTO(loans),
-                HttpStatus.OK
-        );
-    }
+    ResponseEntity<ConsolidationResponseDTO> getLoansByUsername(@PathVariable @NonNull String username) throws UserNotFoundException;
 }
-

@@ -1,35 +1,18 @@
 package com.aspire.takehome.miniaspire.loan.approval.service;
 
-import com.aspire.takehome.miniaspire.common.enums.LoanStatus;
-import com.aspire.takehome.miniaspire.common.exceptions.LoanNotFoundException;
 import com.aspire.takehome.miniaspire.dal.entity.LoanEntity;
-import com.aspire.takehome.miniaspire.dal.repository.LoanRepository;
-import com.aspire.takehome.miniaspire.loan.approval.dto.LoanApprovalRequestDTO;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-@RequiredArgsConstructor
-@Service
-public class LoanApprovalService {
+public interface LoanApprovalService {
 
-    private final LoanRepository loanRepository;
-
+    /**
+     * Approve/Reject the specific loan
+     * @param loanId details of loan to be approved/rejected
+     * @param loanApproved whether the loan is approved or not
+     * @return details of loan with new status
+     */
     @Transactional
-    public LoanEntity approveLoan(Long loanId,
-                                  boolean loanApproved) {
-        LoanEntity loan = loanRepository
-                .findById(loanId)
-                .orElseThrow(() -> new LoanNotFoundException("Loan not found"));
-
-        if (loanApproved) {
-            loan.setStatus(LoanStatus.APPROVED);
-        } else {
-            loan.setStatus(LoanStatus.REJECTED);
-        }
-        return loanRepository.save(loan);
-    }
+    LoanEntity approveLoan(Long loanId,
+                           boolean loanApproved);
 }
-
