@@ -47,9 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/**").permitAll()    // TODO: Remove this
                 .antMatchers("/h2-console/**").permitAll() // Allow access to H2 console
-                .antMatchers("/loans").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
