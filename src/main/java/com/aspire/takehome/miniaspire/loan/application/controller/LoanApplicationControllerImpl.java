@@ -5,6 +5,7 @@ import com.aspire.takehome.miniaspire.dal.entity.LoanEntity;
 import com.aspire.takehome.miniaspire.loan.application.dto.LoanApplicationRequestDTO;
 import com.aspire.takehome.miniaspire.loan.application.dto.LoanApplicationResponseDTO;
 import com.aspire.takehome.miniaspire.loan.application.service.LoanApplicationService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

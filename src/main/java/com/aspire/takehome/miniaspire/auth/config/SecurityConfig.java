@@ -50,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/mini-aspire/v1/auth/register").permitAll()
                 .antMatchers("/mini-aspire/v1/auth/login").permitAll()
                 .antMatchers("/h2-console/**").permitAll()  // Allow access to H2 console
+                .antMatchers("/v2/api-docs/**").permitAll()
+                .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-ui.html", "/swagger-resources/configuration/security").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
