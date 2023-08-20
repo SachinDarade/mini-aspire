@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     private final LoanRepository loanRepository;

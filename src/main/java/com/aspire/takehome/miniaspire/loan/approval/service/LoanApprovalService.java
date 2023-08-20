@@ -5,15 +5,17 @@ import com.aspire.takehome.miniaspire.common.exceptions.LoanNotFoundException;
 import com.aspire.takehome.miniaspire.dal.entity.LoanEntity;
 import com.aspire.takehome.miniaspire.dal.repository.LoanRepository;
 import com.aspire.takehome.miniaspire.loan.approval.dto.LoanApprovalRequestDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class LoanApprovalService {
-    @Autowired
-    private LoanRepository loanRepository;
+
+    private final LoanRepository loanRepository;
 
     @Transactional
     public LoanEntity approveLoan(Long loanId,

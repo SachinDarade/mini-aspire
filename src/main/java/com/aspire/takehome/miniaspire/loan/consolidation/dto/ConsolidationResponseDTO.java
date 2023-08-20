@@ -13,5 +13,5 @@ import java.util.List;
 @Getter
 @Setter
 public class ConsolidationResponseDTO {
-    List<LoanEntity> loans;
+    private List<LoanEntity> loans;
 }

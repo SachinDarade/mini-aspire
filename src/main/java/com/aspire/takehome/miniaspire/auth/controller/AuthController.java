@@ -6,6 +6,7 @@ import com.aspire.takehome.miniaspire.auth.util.JwtUtil;
 import com.aspire.takehome.miniaspire.dal.entity.UserEntity;
 import com.aspire.takehome.miniaspire.auth.dto.UserAuthRequestDTO;
 import com.aspire.takehome.miniaspire.auth.service.UserRegistrationService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,22 +17,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("mini-aspire/v1/auth")
 @Slf4j
 public class AuthController {
+
     private final UserRegistrationService userRegistrationService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
-    public AuthController(UserRegistrationService userRegistrationService) {
-        this.userRegistrationService = userRegistrationService;
-    }
+    private final JwtUtil jwtUtil;
 
     @PostMapping("/register")
     public ResponseEntity<UserRegistrationResponseDTO> registerCustomer(@RequestBody UserAuthRequestDTO registrationDTO) {
