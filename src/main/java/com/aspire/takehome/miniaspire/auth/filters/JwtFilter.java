@@ -1,4 +1,4 @@
-package com.aspire.takehome.miniaspire.security;
+package com.aspire.takehome.miniaspire.auth.filters;
 
 import com.aspire.takehome.miniaspire.common.util.JwtUtil;
 import com.aspire.takehome.miniaspire.auth.service.CustomUserDetailsService;

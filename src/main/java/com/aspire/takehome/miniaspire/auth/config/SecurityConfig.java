@@ -1,6 +1,6 @@
-package com.aspire.takehome.miniaspire.config;
+package com.aspire.takehome.miniaspire.auth.config;
 
-import com.aspire.takehome.miniaspire.security.JwtFilter;
+import com.aspire.takehome.miniaspire.auth.filters.JwtFilter;
 import com.aspire.takehome.miniaspire.auth.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
