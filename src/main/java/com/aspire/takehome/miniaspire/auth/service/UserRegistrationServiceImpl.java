@@ -6,6 +6,8 @@ import com.aspire.takehome.miniaspire.dal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @RequiredArgsConstructor
 @Service
 public class UserRegistrationServiceImpl implements UserRegistrationService {
@@ -13,6 +15,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public UserEntity registerCustomer(UserAuthDTO registrationDTO) {
         UserEntity user = new UserEntity();
         user.setUsername(registrationDTO.getUsername());

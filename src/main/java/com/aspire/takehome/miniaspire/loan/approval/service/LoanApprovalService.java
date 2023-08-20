@@ -8,11 +8,14 @@ import com.aspire.takehome.miniaspire.loan.approval.dto.LoanApprovalRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class LoanApprovalService {
     @Autowired
     private LoanRepository loanRepository;
 
+    @Transactional
     public void approveLoan(LoanApprovalRequestDTO approvalDTO) {
         LoanEntity loan = loanRepository
                 .findById(approvalDTO.getLoanId())
