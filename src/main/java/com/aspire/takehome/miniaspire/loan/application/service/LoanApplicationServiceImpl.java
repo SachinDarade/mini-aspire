@@ -1,4 +1,4 @@
-package com.aspire.takehome.miniaspire.service;
+package com.aspire.takehome.miniaspire.loan.application.service;
 
 import com.aspire.takehome.miniaspire.common.enums.LoanStatus;
 import com.aspire.takehome.miniaspire.common.enums.RepaymentStatus;
@@ -6,9 +6,8 @@ import com.aspire.takehome.miniaspire.dal.entity.LoanEntity;
 import com.aspire.takehome.miniaspire.dal.entity.ScheduledRepaymentEntity;
 import com.aspire.takehome.miniaspire.dal.repository.LoanRepository;
 import com.aspire.takehome.miniaspire.dal.repository.ScheduledRepaymentRepository;
-import com.aspire.takehome.miniaspire.dto.LoanRequestDTO;
+import com.aspire.takehome.miniaspire.loan.application.dto.LoanApplicationRequestDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,7 +15,7 @@ import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
-public class LoanServiceImpl implements LoanService {
+public class LoanApplicationServiceImpl implements LoanApplicationService {
 
     private final LoanRepository loanRepository;
 
@@ -24,7 +23,7 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     @Transactional
-    public LoanEntity createLoan(LoanRequestDTO loanRequest) {
+    public LoanEntity createLoan(LoanApplicationRequestDTO loanRequest) {
         LoanEntity loan = new LoanEntity(
                 null,
                 loanRequest.getAmountRequired(),

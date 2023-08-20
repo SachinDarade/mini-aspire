@@ -1,8 +1,8 @@
-package com.aspire.takehome.miniaspire.service;
+package com.aspire.takehome.miniaspire.auth.service;
 
 import com.aspire.takehome.miniaspire.dal.entity.UserEntity;
 import com.aspire.takehome.miniaspire.dal.repository.UserRepository;
-import com.aspire.takehome.miniaspire.dto.UserAuthDTO;
+import com.aspire.takehome.miniaspire.auth.dto.UserAuthDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

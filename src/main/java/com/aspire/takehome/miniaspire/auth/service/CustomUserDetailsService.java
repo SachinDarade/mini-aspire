@@ -1,4 +1,4 @@
-package com.aspire.takehome.miniaspire.service;
+package com.aspire.takehome.miniaspire.auth.service;
 
 import com.aspire.takehome.miniaspire.dal.entity.UserEntity;
 import com.aspire.takehome.miniaspire.dal.repository.UserRepository;

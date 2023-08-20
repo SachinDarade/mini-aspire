@@ -1,4 +1,4 @@
-package com.aspire.takehome.miniaspire.dto;
+package com.aspire.takehome.miniaspire.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,15 +1,14 @@
-package com.aspire.takehome.miniaspire.controller;
+package com.aspire.takehome.miniaspire.auth.controller;
 
 import com.aspire.takehome.miniaspire.common.util.JwtUtil;
 import com.aspire.takehome.miniaspire.dal.entity.UserEntity;
-import com.aspire.takehome.miniaspire.dto.UserAuthDTO;
-import com.aspire.takehome.miniaspire.service.CustomerService;
+import com.aspire.takehome.miniaspire.auth.dto.UserAuthDTO;
+import com.aspire.takehome.miniaspire.auth.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

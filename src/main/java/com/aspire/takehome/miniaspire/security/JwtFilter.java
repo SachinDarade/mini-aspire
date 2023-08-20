@@ -1,7 +1,7 @@
 package com.aspire.takehome.miniaspire.security;
 
 import com.aspire.takehome.miniaspire.common.util.JwtUtil;
-import com.aspire.takehome.miniaspire.service.CustomUserDetailsService;
+import com.aspire.takehome.miniaspire.auth.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
