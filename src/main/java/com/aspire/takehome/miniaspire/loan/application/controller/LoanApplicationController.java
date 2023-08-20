@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/loans")
+@RequestMapping("mini-aspire/v1/loan/application")
 public class LoanApplicationController {
     @Autowired
     private LoanApplicationService loanApplicationService;

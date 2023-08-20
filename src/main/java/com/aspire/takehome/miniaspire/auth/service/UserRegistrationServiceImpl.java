@@ -1,20 +1,16 @@
 package com.aspire.takehome.miniaspire.auth.service;
 
+import com.aspire.takehome.miniaspire.auth.dto.UserAuthDTO;
 import com.aspire.takehome.miniaspire.dal.entity.UserEntity;
 import com.aspire.takehome.miniaspire.dal.repository.UserRepository;
-import com.aspire.takehome.miniaspire.auth.dto.UserAuthDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
-public class CustomerServiceImpl implements CustomerService {
+public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     private final UserRepository userRepository;
-
-    @Autowired
-    public CustomerServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserEntity registerCustomer(UserAuthDTO registrationDTO) {

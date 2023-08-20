@@ -47,7 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()    // TODO: Remove this
+                .antMatchers("/mini-aspire/v1/auth/register").permitAll()
+                .antMatchers("/mini-aspire/v1/auth/login").permitAll()
                 .antMatchers("/h2-console/**").permitAll()  // Allow access to H2 console
                 .anyRequest().authenticated()
                 .and()
