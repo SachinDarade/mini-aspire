@@ -9,7 +9,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Data
 public class UserEntity {
 
     @Id

@@ -20,9 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
     public UserEntity registerCustomer(UserAuthDTO registrationDTO) {
         UserEntity user = new UserEntity();
         user.setUsername(registrationDTO.getUsername());
-        // TODO: You should hash the password before storing it in the database
         user.setPassword(registrationDTO.getPassword());
-
         return userRepository.save(user);
     }
 }

@@ -1,4 +1,4 @@
-package com.aspire.takehome.miniaspire.common.util;
+package com.aspire.takehome.miniaspire.auth.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

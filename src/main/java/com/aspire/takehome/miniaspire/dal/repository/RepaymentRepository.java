@@ -14,9 +14,6 @@ public interface RepaymentRepository extends JpaRepository<RepaymentEntity, Long
 
     List<RepaymentEntity> findByLoanIdIn(List<Long> loanIds);
 
-    List<RepaymentEntity> findByLoanAndStatus(LoanEntity loan,
-                                              RepaymentStatus repaymentStatus);
-
     Optional<RepaymentEntity> findFirstByLoanIdAndStatusOrderByDueDateAsc(Long loanId,
                                                                           RepaymentStatus repaymentStatus);
 

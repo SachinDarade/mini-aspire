@@ -19,7 +19,6 @@ public class AdminLoanConsolidationService {
 
     private final UserDao userDao;
 
-
     public List<LoanEntity> getLoansWithStatuses(List<LoanStatus> statuses) {
         return loanRepository.findByStatusIn(statuses);
     }

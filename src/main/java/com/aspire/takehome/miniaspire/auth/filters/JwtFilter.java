@@ -1,8 +1,7 @@
 package com.aspire.takehome.miniaspire.auth.filters;
 
-import com.aspire.takehome.miniaspire.common.util.JwtUtil;
+import com.aspire.takehome.miniaspire.auth.util.JwtUtil;
 import com.aspire.takehome.miniaspire.auth.service.CustomUserDetailsService;
-import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

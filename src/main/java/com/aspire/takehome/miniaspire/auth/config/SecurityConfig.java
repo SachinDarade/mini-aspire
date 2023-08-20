@@ -48,13 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()    // TODO: Remove this
-                .antMatchers("/h2-console/**").permitAll() // Allow access to H2 console
+                .antMatchers("/h2-console/**").permitAll()  // Allow access to H2 console
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .headers().frameOptions().sameOrigin() // Enable H2 console in frames
+                .headers().frameOptions().sameOrigin()                  // Enable H2 console in frames
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }

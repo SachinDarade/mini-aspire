@@ -1,6 +1,6 @@
 package com.aspire.takehome.miniaspire.auth.controller;
 
-import com.aspire.takehome.miniaspire.common.util.JwtUtil;
+import com.aspire.takehome.miniaspire.auth.util.JwtUtil;
 import com.aspire.takehome.miniaspire.dal.entity.UserEntity;
 import com.aspire.takehome.miniaspire.auth.dto.UserAuthDTO;
 import com.aspire.takehome.miniaspire.auth.service.CustomerService;
@@ -56,7 +56,7 @@ public class AuthController {
                     )
             );
         } catch (Exception ex) {
-            throw new Exception("In valid username/password");
+            throw new Exception("Invalid username/password");
         }
         return jwtUtil.generateToken(authRequest.getUsername());
     }
