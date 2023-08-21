@@ -2,6 +2,7 @@ package com.aspire.takehome.miniaspire.loan.repayment.service;
 
 import com.aspire.takehome.miniaspire.common.enums.LoanStatus;
 import com.aspire.takehome.miniaspire.common.enums.RepaymentStatus;
+import com.aspire.takehome.miniaspire.common.exceptions.InvalidStateException;
 import com.aspire.takehome.miniaspire.common.exceptions.LoanNotFoundException;
 import com.aspire.takehome.miniaspire.common.exceptions.RepaymentAlreadyPaidException;
 import com.aspire.takehome.miniaspire.common.exceptions.RepaymentAmountInvalidException;
@@ -32,7 +33,11 @@ public class RepaymentServiceImpl implements RepaymentService {
                 .findById(repaymentRequest.getLoanId())
                 .orElseThrow(() -> new LoanNotFoundException("Loan not found"));
 
-        // Step 2: Check repayment amount is valid
+        // Step 2.1: Check if loan is approved
+        if(!loan.getStatus().equals(LoanStatus.PENDING)) {
+            throw new InvalidStateException("Loan must be approved before you could repay it.");
+        }
+        // Step 2.2: Check repayment amount is valid
         verifyRepayAmtValid(
                 loan,
                 repaymentRequest.getAmount()
