@@ -5,14 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class LoanApplicationRequestDTO {
-    @Min(value = 0)
+    @Positive(message = "Amount should be positive")
     private Double amountRequired;
-    @Min(value = 1)
+    @Min(value = 1, message = "Minimum term must be 1")
     private Integer loanTerm;
 }
 

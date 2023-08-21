@@ -1,6 +1,7 @@
 package com.aspire.takehome.miniaspire.loan.approval.service;
 
 import com.aspire.takehome.miniaspire.common.enums.LoanStatus;
+import com.aspire.takehome.miniaspire.common.exceptions.InvalidStateException;
 import com.aspire.takehome.miniaspire.common.exceptions.LoanNotFoundException;
 import com.aspire.takehome.miniaspire.dal.entity.LoanEntity;
 import com.aspire.takehome.miniaspire.dal.repository.LoanRepository;
@@ -18,12 +19,15 @@ public class LoanApprovalServiceImpl implements LoanApprovalService {
     @Override
     @Transactional
     public LoanEntity approveLoan(Long loanId,
-                                  boolean loanApproved) {
+                                  boolean approveLoan) {
         LoanEntity loan = loanRepository
                 .findById(loanId)
                 .orElseThrow(() -> new LoanNotFoundException("Loan not found"));
 
-        if (loanApproved) {
+        if(loan.getStatus() != LoanStatus.PENDING) {
+            throw new InvalidStateException("Loan not in status PENDING");
+        }
+        if (approveLoan) {
             loan.setStatus(LoanStatus.APPROVED);
         } else {
             loan.setStatus(LoanStatus.REJECTED);

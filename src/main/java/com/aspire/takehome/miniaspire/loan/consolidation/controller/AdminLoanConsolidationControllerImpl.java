@@ -35,6 +35,9 @@ public class AdminLoanConsolidationControllerImpl implements AdminLoanConsolidat
         );
     }
 
+    // A customer has access to these 2 methods
+    // Hence, he can view other customer loans as well
+    // JWT and Role based authorization could easily solve this given more time
     @Override
     @GetMapping("/{username}")
     public ResponseEntity<ConsolidationResponseDTO> getLoansByUsername(@Valid @PathVariable @NonNull String username) throws UserNotFoundException {
