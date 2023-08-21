@@ -12,13 +12,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-    @RequestMapping("mini-aspire/v1/auth")
+@RequestMapping("mini-aspire/v1/auth")
 @Slf4j
 public class AuthController {
 
@@ -35,13 +36,6 @@ public class AuthController {
                 new UserRegistrationResponseDTO(user.getId()),
                 HttpStatus.CREATED
         );
-    }
-
-    @GetMapping     // TODO: Remove this
-    public String welcome(Authentication authentication) {
-        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-        log.info("auth user {}", userDetails.getUsername());
-        return "Hello bros";
     }
 
     @PostMapping("/login")
