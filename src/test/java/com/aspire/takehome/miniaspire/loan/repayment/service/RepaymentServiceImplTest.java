@@ -83,6 +83,7 @@ public class RepaymentServiceImplTest {
         loan.setAmountRequired(500.0);
         loan.setAmountPaid(0.0);
         loan.setLoanTerm(5);
+        loan.setStatus(LoanStatus.PENDING);
 
         when(loanRepository.findById(loanId)).thenReturn(Optional.of(loan));
 
