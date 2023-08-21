@@ -137,6 +137,61 @@ Base URL of program is: `http://localhost:8080`
 6. Doing this 3 times in total (payments) will mark the loan as **PAID**.
 7. Please follow the steps as given with values to avoid any confusion in request/response.
 
+## Design Considerations and Rationale
+
+### Modular Architecture
+I structured the application with a modular architecture to promote separation of concerns and maintainability.  
+Each component, such as services, controllers, and repositories, is responsible for a specific functionality. 
+This approach allows for easier testing, debugging, and scalability.  
+The packaging structure is child of my experience with Microservices. The packages are very loosely coupled with each other thus making it easier to test independently. If required the packages can themselves be directly moved to separate repos.
+
+### Spring Boot and Spring Framework
+Leveraged the Spring Boot framework to streamline application setup, configuration, and development. Spring's dependency injection and inversion of control help manage component dependencies and ensure loose coupling between different parts of the application.
+
+### SOLID Principles
+Adhered to the SOLID principles of object-oriented design to enhance the code's maintainability and extensibility:
+- **Single Responsibility Principle (SRP):** Each class has a single responsibility, making it easier to manage and modify.
+- **Open/Closed Principle (OCP):** The code is open for extension but closed for modification, achieved through interfaces and inheritance.
+- **Liskov Substitution Principle (LSP):** Subtypes can be substituted for their base types, ensuring proper inheritance relationships.
+- **Interface Segregation Principle (ISP):** Interfaces are kept focused and small to ensure that implementing classes only have relevant methods.
+- **Dependency Inversion Principle (DIP):** High-level modules are not dependent on low-level modules, both depend on abstractions, fostering flexibility.
+
+### Repository and CQRS Pattern
+Used the repository pattern to encapsulate the data access layer.  
+Everything is packaged as Data Access Layer (DAL) making maintenance and debugging very easy.  
+This UserDao abstraction simplifies database interactions, provides separation from business logic, and allows us to switch between different data sources without affecting the rest of the application.  
+CQRS pattern leaves no space for write and read confusion. Every query does only read or right at a time.
+
+### DTO (Data Transfer Object) Pattern
+DTOs to decouple the data transferred between the frontend and backend from the internal entity structure.  
+This ensures that the API contracts remain stable even if the underlying entity structure changes.
+
+### Exception Handling
+Custom exception classes to handle different error scenarios. By using specific exceptions like `LoanNotFoundException` and `RepaymentAmountInvalidException`, we provide more meaningful error messages to users and developers, making troubleshooting and debugging more efficient.
+
+### Validation
+I have added input validation for DTOs to ensure that the data received from the client is valid and meets the required criteria.  
+This prevents invalid data from entering the system and causing unexpected behavior.
+
+### Use of Enums
+Utilization of enums for loan statuses, repayment statuses, and other constant values.  
+This approach ensures type safety and readability in code, reducing the likelihood of errors caused by typos or incorrect values.
+
+### Unit Testing
+By writing robust test cases for business logic, I have made the code less prone to bugs and errors.
+
+### Dependency Injection
+Used Spring's dependency injection to manage component dependencies. This approach reduces tight coupling.
+
+### Configuration Management
+I used properties files (`application.properties` or `application.yml`) to manage configuration parameters such as database connection details, and application settings.    
+This separation of configuration from code simplifies environment-specific configurations and promotes maintainability.
+
+### Security (User Authentication and Authorization(future scope))
+I have used JWT token based security for authentication of the user.
+
+By considering these design principles and applying best practices, the resulting codebase is more maintainable, extensible, and robust, leading to a higher-quality application that's easier to manage and evolve over time.
+
 ## Future Roadmaps
 Due to time constraint, full-fledged features were not possible to build. Below enhancements could be made given more time:  
 1. Better error handling of edge cases
