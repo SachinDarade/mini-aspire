@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,11 @@ import java.util.function.Function;
 @Slf4j
 public class JwtUtil {
 
-    private final String secret = "javatechiejavatechiejavatechiejavatechiejavatechiejavatechiejavatechie";
+    @Value("${jwt.secret}")
+    private String secret = "sacsacsacsacsacsacsacsacsacsacsacsacsacsacsacsacsacsacsacsacsacsacsacsac";
+
+    @Value("${jwt.expiration}")
+    private long expiration;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -57,7 +62,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(key)
                 .compact();
     }
