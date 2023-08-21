@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class AdminLoanConsolidationControllerImpl implements AdminLoanConsolidat
 
     @Override
     @GetMapping
-    public ResponseEntity<ConsolidationResponseDTO> getLoansWithStatuses(@RequestBody ConsolidationRequestDTO consolidationRequest) {
+    public ResponseEntity<ConsolidationResponseDTO> getLoansWithStatuses(@Valid @RequestBody ConsolidationRequestDTO consolidationRequest) {
         List<LoanEntity> loans = adminLoanConsolidationService.getLoansWithStatuses(consolidationRequest.getStatuses());
         return new ResponseEntity<>(
                 new ConsolidationResponseDTO(loans),
@@ -36,7 +37,7 @@ public class AdminLoanConsolidationControllerImpl implements AdminLoanConsolidat
 
     @Override
     @GetMapping("/{username}")
-    public ResponseEntity<ConsolidationResponseDTO> getLoansByUsername(@PathVariable @NonNull String username) throws UserNotFoundException {
+    public ResponseEntity<ConsolidationResponseDTO> getLoansByUsername(@Valid @PathVariable @NonNull String username) throws UserNotFoundException {
         List<LoanEntity> loans = adminLoanConsolidationService.getLoansByUsername(username);
         return new ResponseEntity<>(
                 new ConsolidationResponseDTO(loans),

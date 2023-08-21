@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
+
 public interface LoanApplicationController {
 
     /**
@@ -19,6 +21,6 @@ public interface LoanApplicationController {
      * @throws UserNotFoundException if the user logged is not found
      */
     @PostMapping
-    ResponseEntity<LoanApplicationResponseDTO> createLoan(@RequestBody LoanApplicationRequestDTO loanRequest,
+    ResponseEntity<LoanApplicationResponseDTO> createLoan(@RequestBody @Valid LoanApplicationRequestDTO loanRequest,
                                                           @AuthenticationPrincipal UserDetails userDetails) throws UserNotFoundException;
 }

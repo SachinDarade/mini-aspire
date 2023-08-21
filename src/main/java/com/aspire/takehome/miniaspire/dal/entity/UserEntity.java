@@ -13,23 +13,23 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @NonNull
-    @Column(name = "username", unique = true)
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
     @NonNull
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @NonNull
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "admin")
-    private boolean admin; // TODO: Change to usertype Add admin field
+    private boolean admin;
 
 }
 

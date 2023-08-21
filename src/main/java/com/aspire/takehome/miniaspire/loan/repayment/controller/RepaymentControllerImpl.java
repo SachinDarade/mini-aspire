@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("mini-aspire/v1/loan/repayment")
@@ -22,7 +24,7 @@ public class RepaymentControllerImpl implements RepaymentController {
 
     @Override
     @PutMapping
-    public ResponseEntity<RepaymentResponseDTO> makeRepayment(@RequestBody RepaymentRequestDTO repaymentRequest) throws RepaymentAmountInvalidException {
+    public ResponseEntity<RepaymentResponseDTO> makeRepayment(@Valid @RequestBody RepaymentRequestDTO repaymentRequest) throws RepaymentAmountInvalidException {
         LoanEntity loan = repaymentService.makeRepayment(repaymentRequest);
         return new ResponseEntity<>(
                 new RepaymentResponseDTO(

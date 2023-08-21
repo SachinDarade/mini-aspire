@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,7 +23,7 @@ public class UserLoanConsolidationControllerImpl implements UserLoanConsolidatio
 
     @Override
     @GetMapping
-    public ResponseEntity<ConsolidationResponseDTO> getUserLoans(@RequestParam Long userId) {
+    public ResponseEntity<ConsolidationResponseDTO> getUserLoans(@Valid @RequestParam Long userId) {
         List<LoanEntity> loans = userLoanConsolidationService.getUserLoans(userId);
         return new ResponseEntity<>(
                 new ConsolidationResponseDTO(loans),
@@ -31,9 +33,8 @@ public class UserLoanConsolidationControllerImpl implements UserLoanConsolidatio
 
     @Override
     @GetMapping("/status")
-    public ResponseEntity<ConsolidationResponseDTO> getUserLoans(
-            @RequestParam Long userId,
-            @RequestBody ConsolidationRequestDTO consolidationRequest
+    public ResponseEntity<ConsolidationResponseDTO> getUserLoans(@NotNull @RequestParam Long userId,
+                                                                 @Valid @RequestBody ConsolidationRequestDTO consolidationRequest
     ) {
         List<LoanEntity> loans = userLoanConsolidationService.getUserLoans(userId, consolidationRequest.getStatuses());
         return new ResponseEntity<>(
@@ -44,7 +45,7 @@ public class UserLoanConsolidationControllerImpl implements UserLoanConsolidatio
 
     @Override
     @GetMapping("/repayments")
-    public ResponseEntity<List<RepaymentEntity>> getUserRepayments(@RequestParam Long userId) {
+    public ResponseEntity<List<RepaymentEntity>> getUserRepayments(@NotNull @RequestParam Long userId) {
         List<RepaymentEntity> repayments = userLoanConsolidationService.getUserRepayments(userId);
         return ResponseEntity.ok(repayments);
     }

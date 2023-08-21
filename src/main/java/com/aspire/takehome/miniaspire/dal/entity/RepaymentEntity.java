@@ -25,7 +25,7 @@ public class RepaymentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @NonNull
@@ -40,7 +40,7 @@ public class RepaymentEntity {
     private RepaymentStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "loan_id")
+    @JoinColumn(name = "loan_id", nullable = false)
     private LoanEntity loan;
 
 }

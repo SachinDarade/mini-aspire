@@ -23,26 +23,26 @@ import java.time.LocalDate;
 public class LoanEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "amountRequired")
+    @Column(name = "amountRequired", nullable = false)
     private Double amountRequired;
 
     @Column(name = "amountPaid")
     private Double amountPaid;
 
-    @Column(name = "loanTerm")
+    @Column(name = "loanTerm", nullable = false)
     private Integer loanTerm;
 
-    @Column(name = "applicationDate")
+    @Column(name = "applicationDate", nullable = false)
     private LocalDate applicationDate;
 
     @Column(name = "status")
     private LoanStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;    // Relating Loan with User
 
 }
